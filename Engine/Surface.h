@@ -11,6 +11,7 @@ public:
 	Surface(const Surface&);
 	Surface& operator=(const Surface&);
 	~Surface();
+	void LoadBitmap(const std::string & filename);
 	void PutPixel(int x, int y, Color c);
 	Color GetPixel(int x, int y) const;
 	int GetWidth() const;
@@ -20,6 +21,5 @@ private:
 	Color* pPixels = nullptr;
 	int width;
 	int height;
-
-
+	int bitCount;
 };
