@@ -40,6 +40,7 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	Surface surf = Surface("dib.bmp");
 	/********************************/
 	/*  User Variables              */
 	/********************************/
