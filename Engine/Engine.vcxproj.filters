@@ -122,5 +122,8 @@
     <Image Include="dib32.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\marle32x48.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
