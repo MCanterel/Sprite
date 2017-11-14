@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -21,16 +21,22 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd)
 {
+	ft.Begin();
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	float elapsed = 0.0f;
+	do {
+		elapsed += ft.Mark();
+	} while (elapsed <= delay);
+
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -38,9 +44,17 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
 }
 
 void Game::ComposeFrame()
 {
-	gfx.DrawSprite( 0,0,surf );
+	int srcX = (frameNum % 4)  * srcBlockSizeX;
+	int srcY = 2 * srcBlockSizeY;
+	frameNum++;
+
+	//gfx.DrawSprite(posX, posY, { 32,64,48,96 }, surf);
+	gfx.DrawSprite(posX, posY, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 },surf);
+	posX += 5;
+	posY += 5;
 }

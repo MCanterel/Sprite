@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Surface.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -41,8 +42,15 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	FrameTimer ft;
 	/********************************/
 	/*  User Variables              */
-	Surface surf = Surface( "dib32.bmp" );
+	Surface surf = Surface( "marle32x48.bmp" );
+	int srcBlockSizeX = 32;
+	int srcBlockSizeY = 48;
+	int frameNum = 1;
+	int posX = 0;
+	int posY = 0;
+	float delay = 0.12f;
 	/********************************/
 };
