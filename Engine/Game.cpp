@@ -54,7 +54,8 @@ void Game::ComposeFrame()
 	frameNum++;
 
 	//gfx.DrawSprite(posX, posY, { 32,64,48,96 }, surf);
-	gfx.DrawSprite(posX, posY, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 },surf);
+	//gfx.DrawSprite(posX, posY, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 },surf);
+	gfx.DrawSprite(wnd.mouse.GetPosX()-32, wnd.mouse.GetPosY()-48, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 }, surf);
 	posX += 5;
 	posY += 5;
 }
