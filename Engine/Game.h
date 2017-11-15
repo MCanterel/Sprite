@@ -51,6 +51,6 @@ private:
 	int frameNum = 1;
 	int posX = 0;
 	int posY = 0;
-	float delay = 0.12f;
+	float delay = 0.05f;
 	/********************************/
 };
