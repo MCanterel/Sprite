@@ -407,12 +407,16 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI & clip, const
 		srcRect.top += clip.top - y;
 		y = clip.top;
 	}
+
 	if (x + srcRect.GetWidth() > clip.right) {
 		srcRect.right -= x + srcRect.GetWidth() - clip.right;
 	}
+	
 	if (y + srcRect.GetHeight() > clip.bottom) {
-		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;  //goes down to the bottom of the srcRect
+							//then climbs back up to the clip.bottom, which is less than all the way back to y
 	}
+
 	for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
 	{
 		for (int sx = srcRect.left; sx < srcRect.right; sx++)
@@ -421,10 +425,22 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI & clip, const
 			if (srcPixel != chroma) {
 				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, srcPixel);
 			}
-
 		}
 	}
 }
+
+
+void Graphics::DrawRect(int x0, int y0, int x1, int y1, Color c)
+{
+	for (int y = y0; y < y1; ++y)
+	{
+		for (int x = x0; x < x1; ++x)
+		{
+			PutPixel(x, y, c);
+		}
+	}
+}
+
 
 
 //////////////////////////////////////////////////

@@ -65,6 +65,11 @@ public:
 	void DrawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
 	void DrawSprite(int x, int y, const RectI& srcRect, const Surface& s, Color chroma = Colors::Magenta);
 	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
+	void DrawRect(int x0, int y0, int x1, int y1, Color c);
+	void DrawRect(const RectI& rect, Color c)
+	{
+		DrawRect(rect.left, rect.top, rect.right, rect.bottom, c);
+	}
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

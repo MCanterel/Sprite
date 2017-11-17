@@ -58,6 +58,13 @@ void Game::ComposeFrame()
 	//gfx.DrawSprite(posX, posY, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 },surf);
 	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, gfx.GetScreenRect(), surf);
 	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 32,64,48,96 }, gfx.GetScreenRect(), surf, Colors::Magenta);
+	
+	//RectI region = { 100,400,100,400 };
+	//.DrawRect(region, Colors::Gray);
+
+	//RectI srcRect = { 32,64,48,96 };
+
+	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 32,64,48,96 }, region , surf, Colors::Magenta);
 	/*posX += 5;
 	posY += 5;*/
 }
