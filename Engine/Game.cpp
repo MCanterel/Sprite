@@ -31,10 +31,10 @@ Game::Game(MainWindow& wnd)
 
 void Game::Go()
 {
-	//float elapsed = 0.0f;
-	//do {
-	//	elapsed += ft.Mark();
-	//} while (elapsed <= delay);
+	float elapsed = 0.0f;
+	do {
+		elapsed += ft.Mark();
+	} while (elapsed <= delay);
 
 	gfx.BeginFrame();
 	UpdateModel();
@@ -49,15 +49,16 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	//int srcX = (frameNum % 4)  * srcBlockSizeX;
-	int srcX = 0;
+	int srcX = (frameNum % 4)  * srcBlockSizeX;
+	//int srcX = 0;
 	int srcY = 2 * srcBlockSizeY;
-	//frameNum++;
+	frameNum++;
 
 	//gfx.DrawSprite(posX, posY, { 32,64,48,96 }, surf);
 	//gfx.DrawSprite(posX, posY, { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, { 100,400,100,400 },surf);
 	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, gfx.GetScreenRect(), surf);
-	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 32,64,48,96 }, gfx.GetScreenRect(), surf, Colors::Magenta);
+	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { 32,64,48,96 }, gfx.GetScreenRect(), surf, Colors::Magenta);
+	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { srcX,srcX + srcBlockSizeX,srcY,srcY + srcBlockSizeY }, gfx.GetScreenRect(), surf, Colors::Magenta);
 	
 	//RectI region = { 100,400,100,400 };
 	//.DrawRect(region, Colors::Gray);
