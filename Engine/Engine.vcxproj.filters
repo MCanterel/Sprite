@@ -69,6 +69,9 @@
     <ClInclude Include="FrameTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -110,6 +113,9 @@
     <ClCompile Include="FrameTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -128,7 +134,13 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="marle32x48.bmp">
+    <Image Include="Images\link90x90.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\marle32x48.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\pilgrim108x140.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

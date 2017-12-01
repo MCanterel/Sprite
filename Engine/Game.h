@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Surface.h"
 #include "FrameTimer.h"
+#include "Animation.h"
 
 class Game
 {
@@ -42,15 +43,19 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	FrameTimer ft;
 	/********************************/
 	/*  User Variables              */
-	Surface surf = Surface( "marle32x48.bmp" );
-	int srcBlockSizeX = 32;
+	FrameTimer ft;
+	//Surface surf = Surface( "images//marle32x48.bmp" );
+	Surface surf2 = Surface("images//pilgrim108x140.bmp");
+	//Animation marleRight = Animation(0, 48, 32, 48, 4, surf, 0.25f);
+	Animation pilgrimRight = Animation(0, 0, 108, 140, 8, surf2, 0.1f);
+
+	/*int srcBlockSizeX = 32;
 	int srcBlockSizeY = 48;
 	int frameNum = 1;
 	int posX = 0;
 	int posY = 0;
-	float delay = 0.12f;
+	float delay = 0.12f;*/
 	/********************************/
 };

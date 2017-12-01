@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\I5-HW\Engine\RectI.h" />
     <ClInclude Include="..\..\I5-HW\Engine\Vei2.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\I5-HW\Engine\RectI.cpp" />
     <ClCompile Include="..\..\I5-HW\Engine\Vei2.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
@@ -236,7 +238,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
-    <Image Include="marle32x48.bmp" />
+    <Image Include="Images\link90x90.bmp" />
+    <Image Include="Images\marle32x48.bmp" />
+    <Image Include="Images\pilgrim108x140.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
