@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.h																				  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -26,13 +26,14 @@
 #include "Surface.h"
 #include "FrameTimer.h"
 #include "Animation.h"
+#include "Character.h"
 
 class Game
 {
 public:
-	Game( class MainWindow& wnd );
-	Game( const Game& ) = delete;
-	Game& operator=( const Game& ) = delete;
+	Game(class MainWindow& wnd);
+	Game(const Game&) = delete;
+	Game& operator=(const Game&) = delete;
 	void Go();
 private:
 	void ComposeFrame();
@@ -47,10 +48,10 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	//Surface surf = Surface( "images//marle32x48.bmp" );
-	Surface surf2 = Surface("images//pilgrim108x140.bmp");
+	//Surface surf2 = Surface("images//pilgrim108x140.bmp");
 	//Animation marleRight = Animation(0, 48, 32, 48, 4, surf, 0.25f);
-	Animation pilgrimRight = Animation(0, 0, 108, 140, 8, surf2, 0.1f);
-
+	//Animation pilgrimRight = Animation(0, 0, 108, 140, 8, surf2, 0.1f);
+	Character link = Character({ 100.0f, 100.0f });
 	/*int srcBlockSizeX = 32;
 	int srcBlockSizeY = 48;
 	int frameNum = 1;

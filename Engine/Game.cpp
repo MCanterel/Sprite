@@ -40,11 +40,24 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	pilgrimRight.Update(ft.Mark());
+	Vec2 dir = { 0.0f, 0.0f };
+	if (wnd.kbd.KeyIsPressed(VK_UP)) {
+		dir.y -= 1;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+		dir.y += 1;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+		dir.x -= 1;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		dir.x += 1;
+	}
+	link.SetDirection(dir);
+	link.Update(ft.Mark());
 }
 
 void Game::ComposeFrame()
 {
-	pilgrimRight.Draw({ wnd.mouse.GetPosX(), wnd.mouse.GetPosY() }, gfx);
-
+	link.Draw(gfx);
 }
