@@ -53,7 +53,8 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
 		dir.x += 1;
 	}
-	link.SetDirection(dir);
+	link.SetDirection(wnd.mouse);
+	//link.SetDirection(dir);
 	link.Update(ft.Mark());
 }
 
