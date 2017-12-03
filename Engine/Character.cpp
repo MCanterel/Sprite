@@ -58,19 +58,26 @@ void Character::SetDirection(const Mouse& mouse)
 {
 	const Vec2 center = pos + Vec2(float(width) / 2.0f, float(height) / 2.0f);
 	const Vec2 toPointer = Vec2(float(mouse.GetPosX()), float(mouse.GetPosY())) - center;
+	Vec2 dir = { 0.0f, 0.0f };
+	if (abs(toPointer.x) + abs(toPointer.y) >= 40) {
+		if (toPointer.x > 0.0f) {
+			iCurSequence = Sequence::WalkingRight;
+			dir.x += 1.0f;
+		}
+		else if (toPointer.x < 0.0f) {
+			iCurSequence = Sequence::WalkingLeft;
+			dir.x -=1.0f;
+		}
+		if (toPointer.y > 0.0f) {
+			iCurSequence = Sequence::WalkingDown;
+			dir.y += 1.0f;
+		}
+		else if (toPointer.y < 0.0f) {
+			iCurSequence = Sequence::WalkingUp;
+			dir.y -= 1.0f;
+		}
+	}
 
-	if (toPointer.x > 0.0f) {
-		iCurSequence = Sequence::WalkingRight;
-	}
-	else if (toPointer.x < 0.0f) {
-		iCurSequence = Sequence::WalkingLeft;
-	}
-	else if (toPointer.y > 0.0f) {
-		iCurSequence = Sequence::WalkingDown;
-	}
-	else if (toPointer.y < 0.0f) {
-		iCurSequence = Sequence::WalkingUp;
-	}
 	else {
 		if (vel.x > 0) {
 			iCurSequence = Sequence::StandingRight;
@@ -85,8 +92,12 @@ void Character::SetDirection(const Mouse& mouse)
 			iCurSequence = Sequence::StandingUp;
 		}
 	}
-	if (toPointer.GetLengthSq() > 40.0f) {
-		vel = toPointer.GetNormalized() * speed;
+	if (toPointer.GetLength() < 20.0f) {
+		vel = { 0.0f,0.0f };
+	}
+	else
+	{
+		vel = dir * speed;
 	}
 
 
