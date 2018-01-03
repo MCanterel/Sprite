@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -21,31 +21,41 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd)
 {
-	Vei2 v;
-	auto v2 = v.GetNormalized();
+	//Vei2 v;
+	//auto v2 = v.GetNormalized();
+
+	for (int i = 0; i < 5; i++)
+	{
+		surfaces.emplace_back(std::move("Images\\link90x90.bmp"));
+	}
+	OutputDebugStringA("This is a copy assign operation:  ");
+	surfaces[1] = surfaces[2];
+	OutputDebugStringA("This is a move assign operation:  ");
+	surfaces[3] = std::move(surfaces[4]);
+	Surface youfucker(surfaces[2]);
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	/*gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
-	gfx.EndFrame();
+	gfx.EndFrame();*/
 }
 
 void Game::UpdateModel()
 {
 	// process key messages while any remain
-	while( !wnd.kbd.KeyIsEmpty() )
+	while (!wnd.kbd.KeyIsEmpty())
 	{
 		const auto e = wnd.kbd.ReadKey();
 		// only interested in space bar presses
-		if( e.IsPress() && e.GetCode() == VK_SPACE )
+		if (e.IsPress() && e.GetCode() == VK_SPACE)
 		{
 			link.ActivateEffect();
 			hit.Play();
@@ -53,29 +63,29 @@ void Game::UpdateModel()
 	}
 	// process arrow keys state
 	Vec2 dir = { 0.0f,0.0f };
-	if( wnd.kbd.KeyIsPressed( VK_UP ) )
+	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
 		dir.y -= 1.0f;
 	}
-	if( wnd.kbd.KeyIsPressed( VK_DOWN ) )
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
 		dir.y += 1.0f;
 	}
-	if( wnd.kbd.KeyIsPressed( VK_LEFT ) )
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
 		dir.x -= 1.0f;
 	}
-	if( wnd.kbd.KeyIsPressed( VK_RIGHT ) )
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
 		dir.x += 1.0f;
 	}
-	link.SetDirection( dir );
+	link.SetDirection(dir);
 	// update character
-	link.Update( ft.Mark() );
+	link.Update(ft.Mark());
 }
 
 void Game::ComposeFrame()
 {
-	font.DrawText( "Becky.\nLemme smash.",wnd.mouse.GetPos() - Vei2{ 50,150 },Colors::White,gfx );
-	link.Draw( gfx );
+	font.DrawText("Becky.\nLemme smash.", wnd.mouse.GetPos() - Vei2{ 50,150 }, Colors::White, gfx);
+	link.Draw(gfx);
 }
