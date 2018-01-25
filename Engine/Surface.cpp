@@ -83,7 +83,7 @@ Surface::Surface(const Surface& rhs)  //(const Surface& rhs)
 	OutputDebugStringA("Surface COPY ctor called.\n");
 }
 
-Surface::Surface(Surface&& donor)
+Surface::Surface(Surface&& donor) noexcept
 	:
 	width(donor.width),
 	height(donor.height),

@@ -11,7 +11,7 @@ public:
 	Surface(int width, int height);
 	//Surface(const Surface&);
 	Surface(const Surface&);
-	Surface(Surface&&);
+	Surface(Surface&&) noexcept;
 	Surface() = default;
 	~Surface();
 	Surface& operator=(const Surface&);

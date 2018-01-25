@@ -31,13 +31,13 @@ Game::Game(MainWindow& wnd)
 
 	for (int i = 0; i < 5; i++)
 	{
-		surfaces.emplace_back(std::move("Images\\link90x90.bmp"));
+		surfaces.emplace_back(std::move("Images\\link90x90.bmp")) ;
 	}
 	OutputDebugStringA("This is a copy assign operation:  ");
 	surfaces[1] = surfaces[2];
 	OutputDebugStringA("This is a move assign operation:  ");
 	surfaces[3] = std::move(surfaces[4]);
-	Surface youfucker(surfaces[2]);
+	//Surface youfucker(surfaces[2]);
 }
 
 void Game::Go()
