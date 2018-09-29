@@ -2,65 +2,77 @@
 #include "ChiliWin.h"
 #include <cassert>
 #include <fstream>
+#include <iostream>
 
 Surface::Surface(const std::string& filename)
 {
-	std::ifstream file(filename, std::ios::binary);
-	assert(file);
+	try {
+		std::ifstream file(filename, std::ios::binary);
 
-	BITMAPFILEHEADER bmFileHeader;
-	file.read(reinterpret_cast<char*>(&bmFileHeader), sizeof(bmFileHeader));
-
-	BITMAPINFOHEADER bmInfoHeader;
-	file.read(reinterpret_cast<char*>(&bmInfoHeader), sizeof(bmInfoHeader));
-
-	assert(bmInfoHeader.biBitCount == 24 || bmInfoHeader.biBitCount == 32);
-	assert(bmInfoHeader.biCompression == BI_RGB);
-
-	const bool is32b = bmInfoHeader.biBitCount == 32;
-
-	width = bmInfoHeader.biWidth;
-
-	// test for reverse row order and control
-	// y loop accordingly
-	int yStart;
-	int yEnd;
-	int dy;
-	if (bmInfoHeader.biHeight < 0)
-	{
-		height = -bmInfoHeader.biHeight;
-		yStart = 0;
-		yEnd = height;
-		dy = 1;
-	}
-	else
-	{
-		height = bmInfoHeader.biHeight;
-		yStart = height - 1;
-		yEnd = -1;
-		dy = -1;
-	}
-
-	pPixels = new Color[width*height];
-
-	file.seekg(bmFileHeader.bfOffBits);
-	// padding is for the case of of 24 bit depth only
-	const int padding = (4 - (width * 3) % 4) % 4;
-
-	for (int y = yStart; y != yEnd; y += dy)
-	{
-		for (int x = 0; x < width; x++)
+		if (!file)
 		{
-			PutPixel(x, y, Color(file.get(), file.get(), file.get()));
-			if (is32b)
+			throw std::runtime_error("Unable to open file.");
+		}
+		//assert(file);
+
+		BITMAPFILEHEADER bmFileHeader;
+		file.read(reinterpret_cast<char*>(&bmFileHeader), sizeof(bmFileHeader));
+
+		BITMAPINFOHEADER bmInfoHeader;
+		file.read(reinterpret_cast<char*>(&bmInfoHeader), sizeof(bmInfoHeader));
+
+		assert(bmInfoHeader.biBitCount == 24 || bmInfoHeader.biBitCount == 32);
+		assert(bmInfoHeader.biCompression == BI_RGB);
+
+		const bool is32b = bmInfoHeader.biBitCount == 32;
+
+		width = bmInfoHeader.biWidth;
+
+		// test for reverse row order and control
+		// y loop accordingly
+		int yStart;
+		int yEnd;
+		int dy;
+		if (bmInfoHeader.biHeight < 0)
+		{
+			height = -bmInfoHeader.biHeight;
+			yStart = 0;
+			yEnd = height;
+			dy = 1;
+		}
+		else
+		{
+			height = bmInfoHeader.biHeight;
+			yStart = height - 1;
+			yEnd = -1;
+			dy = -1;
+		}
+
+		pPixels = new Color[width*height];
+
+		file.seekg(bmFileHeader.bfOffBits);
+		// padding is for the case of of 24 bit depth only
+		const int padding = (4 - (width * 3) % 4) % 4;
+
+		for (int y = yStart; y != yEnd; y += dy)
+		{
+			for (int x = 0; x < width; x++)
 			{
-				file.seekg(1, std::ios::cur);
+				PutPixel(x, y, Color(file.get(), file.get(), file.get()));
+				if (is32b)
+				{
+					file.seekg(1, std::ios::cur);
+				}
+			}
+			if (!is32b)
+			{
+				file.seekg(padding, std::ios::cur);
 			}
 		}
-		if (!is32b)
-		{
-			file.seekg(padding, std::ios::cur);
-		}
+	}
+	catch (const std::runtime_error& e)
+	{
+		std::cout << e.what();
 	}
 }
 
@@ -85,9 +97,9 @@ Surface::Surface(const Surface& rhs)  //(const Surface& rhs)
 
 Surface::Surface(Surface&& donor) noexcept
 	:
-	width(donor.width),
-	height(donor.height),
-	pPixels(donor.pPixels)
+width(donor.width),
+height(donor.height),
+pPixels(donor.pPixels)
 {
 	donor.pPixels = nullptr;
 	donor.width = 0;
